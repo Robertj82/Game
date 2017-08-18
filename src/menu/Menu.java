@@ -6,13 +6,18 @@ import character.Magican;
 import player.Player;
 import character.Fighter;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 public class Menu {
     private Player player;
+    static String characterData = "";
 
-
-    Scanner scanner;
+    public static Scanner scanner = new Scanner(System.in);
 
     public Menu() {
         System.out.println("Witaj w grze!");
@@ -28,12 +33,37 @@ public class Menu {
 
         if (user.equals("1")) {
             Fighter yourCharacter = new Fighter(scanner.nextLine());
+            characterData = "Fighter;"
+                    + yourCharacter.getNick()+";"
+                    + yourCharacter.getHp()+";"
+                    + yourCharacter.getMana()+";"
+                    + yourCharacter.getLvl()+";\n";
         } else if (user.equals("2")) {
             Elf yourCharacter = new Elf(scanner.nextLine());
+            characterData = "Elf;"
+                    + yourCharacter.getNick()+";"
+                    + yourCharacter.getHp()+";"
+                    + yourCharacter.getMana()+";"
+                    + yourCharacter.getLvl()+";\n";
         } else if (user.equals("3")) {
             Magican yourCharacter = new Magican(scanner.nextLine());
+            characterData = "Magician;"
+                    + yourCharacter.getNick()+";"
+                    + yourCharacter.getHp()+";"
+                    + yourCharacter.getMana()+";"
+                    + yourCharacter.getLvl()+";\n";
         }
+
+        File characters = new File("C:" + File.separator + "xx" + File.separator + "monster.txt");
+        try {
+            Files.write((Paths.get("C:" + File.separator + "xx" + File.separator + "monster.txt")),characterData.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         printMenu();
+        //characterDataToTextFile();
+
     }
 
 
@@ -53,16 +83,19 @@ public class Menu {
             userResponse = scanner.nextLine();
 
             switch (userResponse) {
-                case "1":
+                case "1": {
                     Mapa map = new Mapa();
                     map.helloInGame();
+                }break;
 
                 case "2":
                     Sklep shop = new Sklep();
                     shop.visitShop();
 
                 case "3":
-                case "4":
+                case "4":{
+
+                }break;
                 case "5":
                 case "0":
             }
@@ -74,6 +107,6 @@ public class Menu {
 
 
     public static void main(String[] args) {
-
+        Menu menu = new Menu();
     }
 }

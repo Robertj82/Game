@@ -5,13 +5,15 @@ public class Monster {
     private int def;
     private int hp; //życie
     private String name;
+    private int attack;
     //int gameDay = 0;
 
-    public Monster( int def,int hp, String name, int gameDay) {
+    public Monster( int def,int hp, String name, int gameDay, int attack) {
 
         this.def = def;
         this.hp = hp;
         this.name = name;
+        this.attack = attack;
         //this.gameDay = gameDay;
     }
 
@@ -27,7 +29,13 @@ public class Monster {
         return name;
     }
 
+    public int getAttack() {
+        return attack;
+    }
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
 
     @Override
     public boolean equals(Object o) {
